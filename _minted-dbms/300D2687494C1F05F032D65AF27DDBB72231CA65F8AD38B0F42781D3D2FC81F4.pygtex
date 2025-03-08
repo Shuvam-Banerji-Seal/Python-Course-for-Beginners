@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{SELECT}\PYG{+w}{ }\PYG{o}{*}\PYG{+w}{ }\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{anime}\PYG{+w}{ }\PYG{k}{WHERE}\PYG{+w}{ }\PYG{n}{release\PYGZus{}year}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{l+m+mi}{2010}\PYG{p}{;}
+\end{Verbatim}

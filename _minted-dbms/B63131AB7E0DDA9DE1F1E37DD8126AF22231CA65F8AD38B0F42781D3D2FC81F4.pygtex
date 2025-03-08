@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{USE}\PYG{+w}{ }\PYG{n}{your\PYGZus{}database\PYGZus{}name}\PYG{p}{;}
+\end{Verbatim}

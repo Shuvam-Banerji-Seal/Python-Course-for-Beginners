@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{SELECT}\PYG{+w}{ }\PYG{k}{DISTINCT}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{.}\PYG{n}{title}
+\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{anime}\PYG{+w}{ }\PYG{n}{a}
+\PYG{k}{INNER}\PYG{+w}{ }\PYG{k}{JOIN}\PYG{+w}{ }\PYG{n}{characters}\PYG{+w}{ }\PYG{k}{c}\PYG{+w}{ }\PYG{k}{ON}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{.}\PYG{n}{title}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{c}\PYG{p}{.}\PYG{n}{name}\PYG{p}{;}
+\end{Verbatim}

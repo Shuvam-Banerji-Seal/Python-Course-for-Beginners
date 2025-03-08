@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+EXIT\PYG{p}{;}
+mariadb\PYG{+w}{ }\PYGZhy{}u\PYG{+w}{ }root\PYG{+w}{ }\PYGZhy{}p
+\end{Verbatim}

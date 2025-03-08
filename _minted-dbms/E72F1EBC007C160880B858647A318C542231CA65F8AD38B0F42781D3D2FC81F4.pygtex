@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{UPDATE}\PYG{+w}{ }\PYG{n}{characters}\PYG{+w}{ }\PYG{k}{SET}\PYG{+w}{ }\PYG{k}{role}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Main\PYGZsq{}}\PYG{+w}{ }\PYG{k}{WHERE}\PYG{+w}{ }\PYG{n}{name}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Chihiro\PYGZsq{}}\PYG{p}{;}
+\end{Verbatim}
