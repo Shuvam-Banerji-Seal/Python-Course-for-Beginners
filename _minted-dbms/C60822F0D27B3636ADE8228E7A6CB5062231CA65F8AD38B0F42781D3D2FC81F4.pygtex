@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{SELECT}\PYG{+w}{ }\PYG{n}{title}\PYG{+w}{ }\PYG{k}{AS}\PYG{+w}{ }\PYG{n}{name}\PYG{+w}{ }\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{anime}
+\PYG{k}{UNION}\PYG{+w}{ }\PYG{k}{ALL}
+\PYG{k}{SELECT}\PYG{+w}{ }\PYG{n}{name}\PYG{+w}{ }\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{characters}\PYG{p}{;}
+\end{Verbatim}

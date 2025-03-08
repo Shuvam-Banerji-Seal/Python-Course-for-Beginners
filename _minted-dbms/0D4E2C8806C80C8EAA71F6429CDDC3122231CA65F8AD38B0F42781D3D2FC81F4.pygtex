@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{CREATE}\PYG{+w}{ }\PYG{k}{VIEW}\PYG{+w}{ }\PYG{n}{anime\PYGZus{}recent}\PYG{+w}{ }\PYG{k}{AS}
+\PYG{k}{SELECT}\PYG{+w}{ }\PYG{n}{title}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{release\PYGZus{}year}\PYG{+w}{ }\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{anime}\PYG{+w}{ }\PYG{k}{WHERE}\PYG{+w}{ }\PYG{n}{release\PYGZus{}year}\PYG{+w}{ }\PYG{o}{\PYGZgt{}=}\PYG{+w}{ }\PYG{l+m+mi}{2000}\PYG{p}{;}
+\end{Verbatim}

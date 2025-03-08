@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{INSERT}\PYG{+w}{ }\PYG{k}{INTO}\PYG{+w}{ }\PYG{n}{anime}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{title}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{genre}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{release\PYGZus{}year}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{studio\PYGZus{}id}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{VALUES}
+\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Spirited Away\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Fantasy\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2001}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{),}
+\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Jujutsu Kaisen\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}Action\PYGZsq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2020}\PYG{p}{,}\PYG{+w}{ }\PYG{l+m+mi}{2}\PYG{p}{);}
+\end{Verbatim}

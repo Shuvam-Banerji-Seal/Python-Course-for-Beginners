@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{SELECT}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{.}\PYG{n}{title}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{.}\PYG{n}{name}\PYG{+w}{ }\PYG{k}{AS}\PYG{+w}{ }\PYG{n}{studio\PYGZus{}name}
+\PYG{k}{FROM}\PYG{+w}{ }\PYG{n}{anime}\PYG{+w}{ }\PYG{n}{a}
+\PYG{k}{INNER}\PYG{+w}{ }\PYG{k}{JOIN}\PYG{+w}{ }\PYG{n}{studios}\PYG{+w}{ }\PYG{n}{s}\PYG{+w}{ }\PYG{k}{ON}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{.}\PYG{n}{studio\PYGZus{}id}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{s}\PYG{p}{.}\PYG{n}{studio\PYGZus{}id}\PYG{p}{;}
+\end{Verbatim}
