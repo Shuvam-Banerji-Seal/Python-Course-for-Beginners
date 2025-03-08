@@ -1,3 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{SELECT}\PYG{+w}{ }\PYG{k}{USER}\PYG{p}{(),}\PYG{+w}{ }\PYG{k}{CURRENT\PYGZus{}USER}\PYG{p}{();}
-\end{Verbatim}

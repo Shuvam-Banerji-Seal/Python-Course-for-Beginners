@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k}{CREATE}\PYG{+w}{ }\PYG{k}{DATABASE}\PYG{+w}{ }\PYG{n}{test\PYGZus{}db}\PYG{p}{;}
-\PYG{k}{CREATE}\PYG{+w}{ }\PYG{k}{USER}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}test\PYGZus{}user\PYGZsq{}}\PYG{o}{@}\PYG{l+s+s1}{\PYGZsq{}localhost\PYGZsq{}}\PYG{+w}{ }\PYG{n}{IDENTIFIED}\PYG{+w}{ }\PYG{k}{BY}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}secure\PYGZus{}password\PYGZsq{}}\PYG{p}{;}
-\PYG{k}{GRANT}\PYG{+w}{ }\PYG{k}{ALL}\PYG{+w}{ }\PYG{k}{PRIVILEGES}\PYG{+w}{ }\PYG{k}{ON}\PYG{+w}{ }\PYG{n}{test\PYGZus{}db}\PYG{p}{.}\PYG{o}{*}\PYG{+w}{ }\PYG{k}{TO}\PYG{+w}{ }\PYG{l+s+s1}{\PYGZsq{}test\PYGZus{}user\PYGZsq{}}\PYG{o}{@}\PYG{l+s+s1}{\PYGZsq{}localhost\PYGZsq{}}\PYG{p}{;}
-\PYG{n}{FLUSH}\PYG{+w}{ }\PYG{k}{PRIVILEGES}\PYG{p}{;}
-\PYG{n}{EXIT}\PYG{p}{;}
-\end{Verbatim}
