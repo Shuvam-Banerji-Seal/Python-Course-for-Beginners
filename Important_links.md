@@ -11,3 +11,10 @@ https://www.youtube.com/watch?v=vvw98TXVNKI
 
 ## EOF Character::
 https://ruslanspivak.com/eofnotchar/
+
+## Print Statement:
+https://realpython.com/python-print/
+
+
+## Understanding how memory works
+https://www.youtube.com/@CoreDumpped/videos
