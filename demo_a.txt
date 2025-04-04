@@ -1,0 +1,2 @@
+This line was appended using 'a' mode.
+This line was appended using 'a' mode.
