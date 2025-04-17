@@ -18,3 +18,7 @@ https://realpython.com/python-print/
 
 ## Understanding how memory works
 https://www.youtube.com/@CoreDumpped/videos
+
+
+## Links for lists, set, tuples, dictionaries
+https://github.com/gto76/python-cheatsheet
