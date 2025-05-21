@@ -15,8 +15,8 @@ def divide(a, b):
         except ZeroDivisionError:
             print("Error: Division by zero is not allowed. Please enter a non-zero denominator.")
             b = int(input("Enter the second number (non-zero): "))
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
+        except Exception as eroor:
+            print(f"An unexpected error occurred: {eroor}")
             break
 
 # # typeError
