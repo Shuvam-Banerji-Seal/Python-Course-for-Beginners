@@ -1,0 +1,7 @@
+ID,Name,Department,Salary,HireDate,City,YearsOfService
+101,Alice,Engineering,94500.0,2020-03-15,New York,3
+102,Bob,Marketing,68250.0,2019-07-20,Los Angeles,4
+103,Charlie,Engineering,115500.0,2018-01-10,New York,5
+104,David,HR,57750.0,2021-05-30,Chicago,2
+105,Eve,Marketing,73500.0,2021-11-01,Los Angeles,2
+106,Frank,Engineering,105000.0,2022-02-12,Chicago,1
