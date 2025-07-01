@@ -15,15 +15,15 @@ def loop_1():                         #  Using 1 loop
     rows=(n-1)*2                      #  number of rows excluding the header and footer
     for i in range(1,(n-1)*2):        
         if i==(n-2):
-            print("b"*(n-2),"*b*")
+            print(" "*(n-2),"* *")
         elif i==(n-1):
-            print("b"*(n-1),"*")
+            print(" "*(n-1),"*")
         elif 1<=i<(n-1):
-            print("b"*i,"*","b"*((rows-(i-1)*2)-5),"*")
+            print(" "*i,"*"," "*((rows-(i-1)*2)-5),"*")
         elif i==(n):
-            print("b"*(n-2),"*b*")
+            print(" "*(n-2),"* *")
         else:
-            print("b"*(rows-i),"*","b"*(((i-n)-1)*2 +1),"*")
+            print(" "*(rows-i),"*"," "*(((i-n)-1)*2 +1),"*")
     print(" *"*n)
 
 def loop_2():            #  using 2 loops
