@@ -1,0 +1,759 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=0.7in}
+\usepackage{listings}
+\usepackage{xcolor}
+% filepath: /home/shuvam/codes/Python-Course-for-Beginners/DBMS/dbms.tex
+\usepackage{minted}
+\renewcommand{\MintedPython}{python3}
+\usepackage{titling}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{fontspec}  % For Nerd Fonts support
+\usepackage{fancyhdr} % For headers and footers
+\usepackage[colorlinks=true, linkcolor=darkblue, urlcolor=darkblue, citecolor=darkblue]{hyperref}
+\usepackage{url}
+\usepackage{parskip}
+\usepackage{tocloft} % For TOC customization
+
+% Define dark blue color
+\definecolor{darkblue}{RGB}{0,0,128}
+
+
+
+% Header and footer setup
+\pagestyle{fancy}
+\fancyhf{} % Clear header and footer
+\fancyhead[L]{\rightmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{\textit{Notes on Real-World DBMS Application}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% TOC customization
+\renewcommand{\cfttoctitlefont}{\Large\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftsecfont}{\bfseries\color{darkblue}}
+\renewcommand{\cftsecpagefont}{\bfseries\color{darkblue}}
+\renewcommand{\cftsubsecfont}{\color{darkblue}}
+\renewcommand{\cftsubsecpagefont}{\color{darkblue}}
+
+% Minted customization
+\setminted{
+    fontsize=\footnotesize,
+    breaklines=true,
+    frame=single,
+    linenos,
+    numbersep=5pt,
+    bgcolor=gray!10,
+    framesep=2mm,
+    fontfamily=tt,
+    tabsize=4,
+    autogobble,
+    style=friendly
+}
+
+% Code listing style
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    keywordstyle=\color{darkblue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{darkblue},
+    backgroundcolor=\color{gray!10},
+    framesep=2mm,
+    tabsize=4,
+    captionpos=b,
+    xleftmargin=8pt,
+    showstringspaces=false
+}
+
+
+
+\title{\vspace{10cm} Notes on Real-World DBMS Application}
+\author{ \href{https://shuvam-banerji-seal.github.io/}{Shuvam Banerji Seal}}
+\date{February-March, 2025}
+
+\begin{document}
+
+% Title page
+\maketitle
+\thispagestyle{empty}
+\clearpage
+
+% Table of Contents page
+\tableofcontents
+\thispagestyle{fancy}
+\clearpage
+\section{Introduction}
+This document provides detailed notes on installing, configuring, and running MariaDB on Arch Linux. It covers the initial setup, starting the service, securing the installation, creating a port, and connecting to it. Additionally, it includes information on common errors (and solutions), local vs. remote connections, default databases, user management, and usage of the \texttt{mariadb} command-line client.
+
+\section{Why MariaDB Instead of MySQL?}
+MariaDB is an open-source fork of MySQL, developed by the original creators of MySQL after concerns arose over Oracle's acquisition of MySQL. Here are key reasons for choosing MariaDB:
+\begin{itemize}
+    \item \textbf{Open Source Commitment}: MariaDB is fully open-source under the GPL, ensuring transparency and community-driven development, whereas MySQL has a dual-licensing model with proprietary elements.
+    \item \textbf{Performance}: MariaDB offers improved performance with optimized query execution and better thread pooling compared to MySQL.
+    \item \textbf{Drop-in Replacement}: MariaDB is designed to be compatible with MySQL, allowing seamless transitions for existing MySQL users.
+    \item \textbf{Features}: MariaDB includes additional storage engines (e.g., Aria, ColumnStore) and features not found in MySQL, enhancing flexibility.
+    \item \textbf{Arch Linux Support}: MariaDB is well-supported in Arch Linux’s repositories, aligning with the distribution’s minimalist and up-to-date philosophy.
+\end{itemize}
+Given these advantages, MariaDB is a robust alternative for database management on Arch Linux.
+
+\section{Installation}
+Arch Linux uses the \texttt{pacman} package manager. To install MariaDB, execute the following command in the terminal:
+\begin{lstlisting}
+sudo pacman -S mariadb
+\end{lstlisting}
+This installs the latest MariaDB server and client packages from the Arch repositories.
+
+\section{Initializing the Database}
+Before starting MariaDB, initialize the database storage directory:
+\begin{lstlisting}
+sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+\end{lstlisting}
+Explanation of options:
+\begin{itemize}
+    \item \texttt{--user=mysql}: Runs the database as the \texttt{mysql} user.
+    \item \texttt{--basedir=/usr}: Specifies the MariaDB installation directory (often ignored by some tools).
+    \item \texttt{--datadir=/var/lib/mysql}: Sets the data directory (default on Arch Linux).
+\end{itemize}
+
+\section{Starting the MariaDB Service}
+Arch Linux uses \texttt{systemd} for service management. Start and enable the MariaDB service:
+\begin{lstlisting}
+sudo systemctl start mariadb
+sudo systemctl enable mariadb
+\end{lstlisting}
+\begin{itemize}
+    \item \texttt{start}: Launches the service immediately.
+    \item \texttt{enable}: Ensures the service starts on boot.
+\end{itemize}
+Verify the service is running:
+\begin{lstlisting}
+systemctl status mariadb
+\end{lstlisting}
+
+\section{Securing the Installation}
+MariaDB includes a script to secure the initial setup. Run:
+\begin{lstlisting}
+sudo mariadb-secure-installation
+\end{lstlisting}
+Follow the prompts to:
+\begin{itemize}
+    \item Set a root password.
+    \item Remove anonymous users.
+    \item Disallow remote root login (recommended for local setups).
+    \item Remove the test database.
+    \item Reload privilege tables.
+\end{itemize}
+
+\section{Configuring the Port}
+By default, MariaDB listens on port 3306. To confirm or change this, edit the configuration file located at \texttt{/etc/my.cnf.d/server.cnf}. Open it with a text editor:
+\begin{lstlisting}
+sudo nano /etc/my.cnf.d/server.cnf
+\end{lstlisting}
+Under the \texttt{[mysqld]} section, ensure or set the port:
+\begin{lstlisting}
+[mysqld]
+port=3306
+\end{lstlisting}
+To use a custom port (e.g., 3307), modify it:
+\begin{lstlisting}
+[mysqld]
+port=3307
+\end{lstlisting}
+Save the file and restart the service:
+\begin{lstlisting}
+sudo systemctl restart mariadb
+\end{lstlisting}
+Verify the port is in use:
+\begin{lstlisting}
+sudo netstat -tuln | grep 3307
+\end{lstlisting}
+
+\section{Connecting to the Database (Local and Remote)}
+\subsection{Who Is \texttt{localhost} and Why Do We Use \texttt{'username'@\textquotesingle host\textquotesingle}?}
+\paragraph{Localhost Explained}
+In most configurations, \texttt{localhost} refers to the local machine (the loopback address \texttt{127.0.0.1} for IPv4 or \texttt{::1} for IPv6). When you connect to \texttt{localhost}, it usually does not use the external network interface; instead, it can use a local Unix socket or named pipe (depending on the operating system). This means:
+\begin{itemize}
+    \item \textbf{Connections via \texttt{localhost}} are not accessible externally, ensuring a measure of security by restricting traffic to the local system only.
+    \item If you want to allow remote connections, you must bind MariaDB to an external IP (e.g., \texttt{0.0.0.0} for all interfaces) and configure your firewall to allow inbound traffic on the MariaDB port (default \texttt{3306}).
+\end{itemize}
+
+\paragraph{Why \texttt{'username'@\textquotesingle host\textquotesingle}?}
+In MySQL/MariaDB, user accounts are defined by \emph{both} the username and the host from which they can connect. This is why the account name appears in the form \texttt{'user'@\textquotesingle host\textquotesingle}. Here’s how it works:
+\begin{itemize}
+    \item \textbf{Distinct Accounts per Host}: \texttt{'alice'@\textquotesingle localhost\textquotesingle} is considered a completely different account from \texttt{'alice'@\textquotesingle 192.168.1.10\textquotesingle} or \texttt{'alice'@\textquotesingle \%\textquotesingle}. This allows fine-grained control. For instance, you can grant certain privileges to a user when they connect locally but different (or no) privileges when connecting from elsewhere.
+    \item \textbf{Security and Access Control}: By specifying the host portion in the username definition, you can restrict which machines or IP addresses are allowed to connect under that username. For example:
+    \begin{itemize}
+        \item \texttt{'bob'@\textquotesingle localhost\textquotesingle}: Bob can only connect from the same machine running MariaDB.
+        \item \texttt{'bob'@\textquotesingle \%\textquotesingle}: Bob can connect from any IP address (assuming the server is bound to allow remote connections).
+        \item \texttt{'bob'@\textquotesingle 192.168.1.\%\textquotesingle}: Bob can connect from any IP in the \texttt{192.168.1.x} subnet.
+    \end{itemize}
+    \item \textbf{Practical Example}:
+\begin{lstlisting}
+CREATE USER 'alice'@'localhost' IDENTIFIED BY 'password1';
+CREATE USER 'alice'@'%'         IDENTIFIED BY 'password2';
+\end{lstlisting}
+Here, \texttt{'alice'@\textquotesingle localhost\textquotesingle} and \texttt{'alice'@\textquotesingle \%\textquotesingle} are two separate accounts, each potentially with different privileges and passwords.
+\end{itemize}
+
+
+\subsection{Local Connection}
+To connect locally (default port 3306):
+\begin{lstlisting}
+mariadb -u root -p
+\end{lstlisting}
+You will be prompted for a password.
+
+\subsection{Remote Connection}
+If you changed the bind address and are connecting remotely (e.g., IP \texttt{192.168.1.50} and port 3307):
+\begin{lstlisting}
+mariadb -u root -p -h 192.168.1.50 --port=3307
+\end{lstlisting}
+
+\subsection{Common Flags for \texttt{mariadb}}
+\begin{itemize}
+    \item \texttt{-u <user>}: Specify the username, e.g., \texttt{root}.
+    \item \texttt{-p}: Prompt for the user’s password.
+    \item \texttt{-h <host>}: Connect to the specified host (default is \texttt{localhost}).
+    \item \texttt{--port=<port>}: Use a custom port number.
+    \item \texttt{--socket=<path>}: Connect using a Unix socket (local).
+    \item \texttt{--ssl}: Force use of SSL encryption if configured.
+    \item \texttt{--execute=<statement>}: Execute the statement and exit (non-interactive).
+\end{itemize}
+
+\subsection{Handling the \texttt{mariadb} Command Interface}
+When you connect successfully, you will see a prompt like:
+\begin{lstlisting}
+MariaDB [(none)]>
+\end{lstlisting}
+Within this interface:
+\begin{itemize}
+    \item End commands with a semicolon (\texttt{;}).
+    \item Use \texttt{SHOW DATABASES;} or \texttt{SHOW TABLES;} to list databases/tables.
+    \item Use \texttt{HELP;} (or \texttt{HELP <command>}) for basic usage info.
+    \item Press \texttt{Ctrl+D} or type \texttt{EXIT;} to leave the interface.
+\end{itemize}
+
+\section{Default Databases in MariaDB}
+After a fresh initialization, MariaDB ships with several default databases:
+\begin{itemize}
+    \item \texttt{mysql}: Stores user accounts, privileges, and internal metadata.
+    \item \texttt{information\_schema}: Provides read-only views of database metadata (tables, columns, etc.).
+    \item \texttt{performance\_schema}: Tracks performance-related metrics and server events.
+    \item \texttt{sys}: Contains helper views and functions that simplify querying performance and diagnostic data.
+\end{itemize}
+
+\section{Creating and Managing Users \& Privileges}
+\subsection{Creating a User}
+You can create a user with:
+\begin{lstlisting}
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'user_password';
+\end{lstlisting}
+
+\subsection{Granting Privileges}
+Basic syntax to grant privileges:
+\begin{lstlisting}
+GRANT <privileges> ON <database>.<table> TO 'username'@'localhost';
+\end{lstlisting}
+Common privilege sets include:
+\begin{itemize}
+    \item \texttt{ALL PRIVILEGES}: Grant everything on a database or table.
+    \item \texttt{SELECT, INSERT, UPDATE, DELETE}: Typical DML privileges.
+    \item \texttt{CREATE, ALTER, DROP}: DDL privileges to modify schema.
+    \item \texttt{GRANT OPTION}: Allows the user to grant privileges to others.
+\end{itemize}
+For example, granting all privileges on a specific database:
+\begin{lstlisting}
+GRANT ALL PRIVILEGES ON mydatabase.* TO 'username'@'localhost';
+FLUSH PRIVILEGES;
+\end{lstlisting}
+Remember to \texttt{FLUSH PRIVILEGES;} so changes take effect immediately.
+
+\subsection{Removing Privileges or Users}
+You can revoke privileges:
+\begin{lstlisting}
+REVOKE ALL PRIVILEGES ON mydatabase.* FROM 'username'@'localhost';
+\end{lstlisting}
+Or drop the user entirely:
+\begin{lstlisting}
+DROP USER 'username'@'localhost';
+\end{lstlisting}
+\section{Using the \texttt{mariadb} Terminal}
+The \texttt{mariadb} command-line interface (CLI) is the main way to interact directly with MariaDB. You can perform tasks such as creating databases, managing tables, and running queries all from the \texttt{mariadb} shell.
+
+\subsection{Starting the \texttt{mariadb} Shell}
+Use the following command to open the MariaDB shell as a specific user (e.g., \texttt{root}):
+\begin{lstlisting}
+mariadb -u root -p
+\end{lstlisting}
+When prompted, enter the password for the specified user. Once logged in, you will see a prompt like:
+\begin{lstlisting}
+MariaDB [(none)]>
+\end{lstlisting}
+You can also specify a host, port, or socket if needed:
+\begin{lstlisting}
+mariadb -u user -p -h <host> --port=<port>
+\end{lstlisting}
+
+\subsection{Essential Commands Within the Shell}
+Below are common commands you may use:
+
+\begin{itemize}
+    \item \textbf{Show Databases}:
+    \begin{lstlisting}
+    SHOW DATABASES;
+    \end{lstlisting}
+    Lists all databases accessible to the current user.
+
+    \item \textbf{Select a Database}:
+    \begin{lstlisting}
+    USE mydatabase;
+    \end{lstlisting}
+    Switches the session context to the specified database.
+
+    \item \textbf{Show Tables}:
+    \begin{lstlisting}
+    SHOW TABLES;
+    \end{lstlisting}
+    Lists all tables in the current database.
+
+    \item \textbf{Describe a Table}:
+    \begin{lstlisting}
+    DESCRIBE tablename;
+    \end{lstlisting}
+    Displays column information (name, type, etc.) for \texttt{tablename}.
+
+    \item \textbf{Creating Databases and Tables}:
+    \begin{lstlisting}
+    CREATE DATABASE mydatabase;
+    CREATE TABLE mytable (
+       id INT AUTO_INCREMENT PRIMARY KEY,
+       name VARCHAR(255),
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    \end{lstlisting}
+
+    \item \textbf{Data Manipulation (CRUD)}:
+    \begin{lstlisting}
+    INSERT INTO mytable (name) VALUES ('Alice');
+    SELECT * FROM mytable;
+    UPDATE mytable SET name='Bob' WHERE id=1;
+    DELETE FROM mytable WHERE id=1;
+    \end{lstlisting}
+    Use these commands to insert, query, update, or delete data within tables.
+
+    \item \textbf{Managing Users and Privileges} (if you are a privileged user):
+    \begin{lstlisting}
+    CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'secure_password';
+    GRANT ALL PRIVILEGES ON mydatabase.* TO 'newuser'@'localhost';
+    FLUSH PRIVILEGES;
+    \end{lstlisting}
+
+    \item \textbf{Exiting the Shell}:
+    \begin{lstlisting}
+    EXIT;
+    \end{lstlisting}
+    or press \texttt{Ctrl+D}.
+\end{itemize}
+
+\subsection{Getting Help from Within the Shell}
+You can get brief help on many topics directly in the shell:
+\begin{lstlisting}
+HELP;
+HELP <command>;
+\end{lstlisting}
+For instance, \texttt{HELP CREATE TABLE;} will display syntax details for creating tables.
+
+\subsection{Tips for Using the \texttt{mariadb} Shell}
+\begin{itemize}
+    \item End all SQL statements with a semicolon (\texttt{;}).
+    \item Use the \texttt{UP/DOWN} arrow keys to navigate command history.
+    \item Use tab-completion for partially typed commands, table names, etc.
+    \item Complex multi-line queries can be typed and edited freely until you end with \texttt{;}.
+    \item If you make a mistake while typing, use \texttt{Ctrl+C} to cancel the current query line and return to the prompt.
+\end{itemize}
+
+\section{Creating a Test Database and User (Example)}
+To test connectivity, create a database and user:
+\begin{minted}{sql}
+CREATE DATABASE test_db;
+CREATE USER 'test_user'@'localhost' IDENTIFIED BY 'secure_password';
+GRANT ALL PRIVILEGES ON test_db.* TO 'test_user'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+\end{minted}
+Connect as the new user:
+\begin{lstlisting}
+mariadb -u test_user -p
+\end{lstlisting}
+(or add \texttt{--port} if you changed it).
+
+\section{Connecting Remotely (Optional)}
+To allow remote connections, edit \texttt{/etc/my.cnf.d/server.cnf} and set:
+\begin{lstlisting}
+[mysqld]
+bind-address=0.0.0.0
+\end{lstlisting}
+Restart the service and update the user privileges:
+\begin{lstlisting}
+GRANT ALL PRIVILEGES ON test_db.* TO 'test_user'@'%' IDENTIFIED BY 'secure_password';
+FLUSH PRIVILEGES;
+\end{lstlisting}
+Ensure the firewall allows the port (e.g., using \texttt{ufw} or \texttt{iptables}):
+\begin{lstlisting}
+sudo ufw allow 3307
+\end{lstlisting}
+
+\section{Possible Errors and Their Solutions}
+This section covers common errors you might encounter and how to fix them.
+
+\subsection{Missing System Tables (e.g., \texttt{Table 'mysql.plugin' doesn't exist})}
+\begin{itemize}
+    \item \textbf{Cause}: The system database has not been initialized properly, or the data directory is empty/corrupted.
+    \item \textbf{Solution}:
+          \begin{enumerate}
+              \item Confirm your \texttt{datadir} setting (usually \texttt{/var/lib/mysql}) and ensure ownership is \texttt{mysql:mysql}.
+              \item Re-run the initialization command (e.g., \texttt{mariadb-install-db}) to create system tables.
+              \item Restart \texttt{mariadb}.
+          \end{enumerate}
+\end{itemize}
+
+\subsection{\texttt{Access denied for user 'mysql'@'localhost'}}
+\begin{itemize}
+    \item \textbf{Cause}: Attempting to log in with the \texttt{mysql} system account, which typically lacks administrative privileges. Or root access is restricted by password.
+    \item \textbf{Solution}:
+          \begin{enumerate}
+              \item Use \texttt{root} (or another privileged user) instead of \texttt{mysql}.
+              \item If you lost the root password, reset it by starting \texttt{mariadbd} with \texttt{--skip-grant-tables} and updating the password manually.
+          \end{enumerate}
+\end{itemize}
+
+\subsection{\texttt{Can't open and lock privilege tables}}
+\begin{itemize}
+    \item \textbf{Cause}: Permission or ownership problems in the data directory, or the system tables are missing.
+    \item \textbf{Solution}:
+          \begin{enumerate}
+              \item Run \texttt{sudo chown -R mysql:mysql /var/lib/mysql}.
+              \item Ensure SELinux/AppArmor isn’t blocking access (if applicable).
+              \item Re-initialize and restart if needed.
+          \end{enumerate}
+\end{itemize}
+
+\subsection{Port Conflicts (e.g., \texttt{port already in use})}
+\begin{itemize}
+    \item \textbf{Cause}: Another process is listening on the same port (e.g., 3306).
+    \item \textbf{Solution}:
+          \begin{enumerate}
+              \item Use \texttt{sudo netstat -tuln | grep 3306} to find the conflicting process.
+              \item Stop or reconfigure the conflicting service, or change MariaDB’s port in \texttt{/etc/my.cnf.d/server.cnf}.
+          \end{enumerate}
+\end{itemize}
+
+\subsection{Authentication Plugin Issues}
+\begin{itemize}
+    \item \textbf{Cause}: Some distributions use \texttt{unix\_socket} authentication for root, leading to unexpected login methods.
+    \item \textbf{Solution}:
+          \begin{enumerate}
+              \item \texttt{ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql\_native\_password} if you want a password-based method.
+              \item Consult distribution documentation for default authentication plugins.
+          \end{enumerate}
+\end{itemize}
+
+\section{Entering the MariaDB Shell with \texttt{mariadb}}
+When you type the command
+\begin{minted}{bash}
+mariadb
+\end{minted}
+(without any additional flags like \texttt{-u} or \texttt{-p}), MariaDB will attempt to authenticate you based on your system user or through an anonymous account (if available). Below is what you can do to understand how you are logged in and what privileges you have.
+
+\subsection{Checking Your Current User and Privileges}
+\begin{enumerate}
+  \item \textbf{Identify the Current User:}
+  \begin{minted}{sql}
+SELECT USER(), CURRENT_USER();
+  \end{minted}
+  \begin{itemize}
+    \item \texttt{USER()} displays who you \emph{attempted} to authenticate as.
+    \item \texttt{CURRENT\_USER()} shows how the server \emph{actually} recognized you, which might differ if you’re using an anonymous account or a socket-based authentication plugin.
+  \end{itemize}
+
+  \item \textbf{Check Your Privileges:}
+  \begin{minted}{sql}
+SHOW GRANTS;
+  \end{minted}
+  This command lists all privileges granted to the current user. If you see \texttt{"GRANT USAGE ON *.* TO ''@'localhost'"} or limited statements, you may be operating under an anonymous user with restricted privileges.
+\end{enumerate}
+
+\subsection{What Information Can You Access?}
+Depending on your privileges, you can run various \texttt{SHOW} commands to see different parts of the database server’s metadata:
+\begin{itemize}
+  \item \textbf{List All Databases:}
+  \begin{minted}{sql}
+SHOW DATABASES;
+  \end{minted}
+  If you have only partial or no privileges, you may see limited or even zero databases listed.
+
+  \item \textbf{Select a Database:}
+  \begin{minted}{sql}
+USE your_database_name;
+  \end{minted}
+  Switches the active database, though you may be denied if you lack access.
+
+  \item \textbf{List Tables in the Current Database:}
+  \begin{minted}{sql}
+SHOW TABLES;
+  \end{minted}
+  Again, if your account does not have \texttt{SELECT} or other privileges on any table, you might see an empty list or receive permission errors.
+
+  \item \textbf{Describe a Table:}
+  \begin{minted}{sql}
+DESCRIBE your_table_name;
+  \end{minted}
+  Shows the columns, types, and other schema details of \texttt{your\_table\_name}, if allowed.
+
+  \item \textbf{View Server Status or Variables (Restricted for Low-Privilege Users):}
+  \begin{minted}{sql}
+SHOW STATUS;
+SHOW VARIABLES;
+  \end{minted}
+  These commands show server runtime statistics and configuration variables, but you might need higher privileges (\texttt{SUPER} or \texttt{PROCESS}) to see full information.
+\end{itemize}
+
+\subsection{Limitations of an Anonymous or Unprivileged Session}
+If you see something like:
+\begin{minted}{sql}
++----------------+
+| current_user() |
++----------------+
+| @localhost     |
++----------------+
+\end{minted}
+it means you are logged in as an anonymous user (\texttt{''@'localhost'}). Anonymous sessions often have minimal or no privileges, so you may be unable to create, modify, or drop databases and tables. You will likely encounter permission errors when attempting administrative tasks.
+
+\subsection{Moving to a Privileged Account}
+To gain more control, exit the session and specify a proper username (\texttt{root} or another admin user) and password if required:
+\begin{minted}{bash}
+EXIT;
+mariadb -u root -p
+\end{minted}
+If you do not have credentials for a privileged account, ask your database administrator to grant you additional privileges or create a user for you with the appropriate access rights.
+
+\subsection{Summary}
+When entering the MariaDB shell using only \texttt{mariadb}, the user may be authenticated in one of several ways:
+\begin{enumerate}
+  \item As an anonymous (\textit{empty}) user, if such an account exists.
+  \item As a user mapped via socket authentication (common for \texttt{root} on some systems).
+  \item As your system user, if configured.
+\end{enumerate}
+Once inside, you can run \texttt{SHOW GRANTS}, \texttt{SELECT USER()}, and \texttt{SELECT CURRENT\_USER()} to discover your effective user and privileges. If you need higher-level operations, exit and log in under a more privileged username.
+
+\section{Creating an Anime-Themed Database}
+Let’s create a database called \texttt{anime\_world} with related tables: \texttt{anime}, \texttt{characters}, \texttt{studios}, and \texttt{episodes}.
+
+\subsection{Database and Table Creation}
+Log in and create the database:
+\begin{minted}{sql}
+CREATE DATABASE anime_world;
+USE anime_world;
+\end{minted}
+
+Create the \texttt{anime} table:
+\begin{minted}{sql}
+CREATE TABLE anime (
+    anime_id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(100) NOT NULL,
+    genre VARCHAR(50),
+    release_year INT,
+    studio_id INT
+);
+\end{minted}
+
+Create the \texttt{studios} table:
+\begin{minted}{sql}
+CREATE TABLE studios (
+    studio_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    founded_year INT
+);
+\end{minted}
+
+Create the \texttt{characters} table:
+\begin{minted}{sql}
+CREATE TABLE characters (
+    char_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    role VARCHAR(20),
+    anime_id INT,
+    FOREIGN KEY (anime_id) REFERENCES anime(anime_id)
+);
+\end{minted}
+
+Create the \texttt{episodes} table:
+\begin{minted}{sql}
+CREATE TABLE episodes (
+    ep_id INT PRIMARY KEY AUTO_INCREMENT,
+    anime_id INT,
+    episode_number INT NOT NULL,
+    title VARCHAR(100),
+    air_date DATE,
+    FOREIGN KEY (anime_id) REFERENCES anime(anime_id)
+);
+\end{minted}
+
+Add foreign key to \texttt{anime} for \texttt{studios}:
+\begin{minted}{sql}
+ALTER TABLE anime
+ADD FOREIGN KEY (studio_id) REFERENCES studios(studio_id);
+\end{minted}
+
+\subsection{Sample Data}
+Insert data into \texttt{studios}:
+\begin{minted}{sql}
+INSERT INTO studios (name, founded_year) VALUES
+('Studio Ghibli', 1985),
+('MAPPA', 2011);
+\end{minted}
+
+Insert data into \texttt{anime}:
+\begin{minted}{sql}
+INSERT INTO anime (title, genre, release_year, studio_id) VALUES
+('Spirited Away', 'Fantasy', 2001, 1),
+('Jujutsu Kaisen', 'Action', 2020, 2);
+\end{minted}
+
+Insert data into \texttt{characters}:
+\begin{minted}{sql}
+INSERT INTO characters (name, role, anime_id) VALUES
+('Chihiro', 'Protagonist', 1),
+('Gojo Satoru', 'Supporting', 2);
+\end{minted}
+
+Insert data into \texttt{episodes}:
+\begin{minted}{sql}
+INSERT INTO episodes (anime_id, episode_number, title, air_date) VALUES
+(1, 1, 'The Tunnel', '2001-07-20'),
+(2, 1, 'Ryomen Sukuna', '2020-10-03');
+\end{minted}
+
+\section{Database Functionalities and Operations}
+MariaDB supports a wide range of functionalities and operations.
+
+\subsection{Basic CRUD Operations}
+\begin{itemize}
+    \item \textbf{Create}: Insert data (as shown above).
+    \item \textbf{Read}: Query data:
+    \begin{minted}{sql}
+    SELECT * FROM anime WHERE release_year > 2010;
+    \end{minted}
+    \item \textbf{Update}: Modify records:
+    \begin{minted}{sql}
+    UPDATE characters SET role = 'Main' WHERE name = 'Chihiro';
+    \end{minted}
+    \item \textbf{Delete}: Remove records:
+    \begin{minted}{sql}
+    DELETE FROM episodes WHERE episode_number = 1;
+    \end{minted}
+\end{itemize}
+
+\subsection{Table Management}
+\begin{itemize}
+    \item Add a column:
+    \begin{minted}{sql}
+    ALTER TABLE anime ADD COLUMN rating DECIMAL(2,1);
+    \end{minted}
+    \item Drop a table:
+    \begin{minted}{sql}
+    DROP TABLE episodes;
+    \end{minted}
+\end{itemize}
+
+\subsection{Indexes}
+Improve query performance:
+\begin{minted}{sql}
+CREATE INDEX idx_title ON anime(title);
+\end{minted}
+
+\subsection{Views}
+Create a virtual table:
+\begin{minted}{sql}
+CREATE VIEW anime_recent AS
+SELECT title, release_year FROM anime WHERE release_year >= 2000;
+\end{minted}
+Query the view:
+\begin{minted}{sql}
+SELECT * FROM anime_recent;
+\end{minted}
+
+\section{Set Operations}
+MariaDB supports set operations to combine query results.
+
+\subsection{UNION}
+Combine distinct anime and character names:
+\begin{minted}{sql}
+SELECT title AS name FROM anime
+UNION
+SELECT name FROM characters;
+\end{minted}
+
+\subsection{UNION ALL}
+Include duplicates:
+\begin{minted}{sql}
+SELECT title AS name FROM anime
+UNION ALL
+SELECT name FROM characters;
+\end{minted}
+
+\subsection{INTERSECT (Emulated)}
+MariaDB lacks native \texttt{INTERSECT}, but it can be emulated with \texttt{INNER JOIN}:
+\begin{minted}{sql}
+SELECT DISTINCT a.title
+FROM anime a
+INNER JOIN characters c ON a.title = c.name;
+\end{minted}
+
+\subsection{EXCEPT (Emulated)}
+Emulate \texttt{EXCEPT} with \texttt{LEFT JOIN}:
+\begin{minted}{sql}
+SELECT a.title
+FROM anime a
+LEFT JOIN characters c ON a.title = c.name
+WHERE c.name IS NULL;
+\end{minted}
+
+\section{Inner Joins}
+Inner joins combine related data from multiple tables.
+
+\subsection{Anime and Studios}
+Join \texttt{anime} and \texttt{studios}:
+\begin{minted}{sql}
+SELECT a.title, s.name AS studio_name
+FROM anime a
+INNER JOIN studios s ON a.studio_id = s.studio_id;
+\end{minted}
+
+\subsection{Anime and Characters}
+Join \texttt{anime} and \texttt{characters}:
+\begin{minted}{sql}
+SELECT a.title, c.name AS character_name, c.role
+FROM anime a
+INNER JOIN characters c ON a.anime_id = c.anime_id;
+\end{minted}
+
+\subsection{Multi-Table Join}
+Join \texttt{anime}, \texttt{characters}, and \texttt{episodes}:
+\begin{minted}{sql}
+SELECT a.title, c.name AS character_name, e.title AS episode_title
+FROM anime a
+INNER JOIN characters c ON a.anime_id = c.anime_id
+INNER JOIN episodes e ON a.anime_id = e.anime_id
+WHERE e.episode_number = 1;
+\end{minted}
+\end{document}
