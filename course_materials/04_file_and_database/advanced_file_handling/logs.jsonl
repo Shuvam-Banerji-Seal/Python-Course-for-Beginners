@@ -1,0 +1,7 @@
+{"timestamp": "2023-10-27T10:00:00Z", "level": "INFO", "message": "User logged in", "user_id": "101"}
+{"timestamp": "2023-10-27T10:01:30Z", "level": "WARN", "message": "Failed login attempt", "ip": "192.168.1.100"}
+{"timestamp": "2023-10-27T10:02:00Z", "level": "INFO", "message": "Data exported", "user_id": "103"}
+{"event_id": 500, "type": "click", "element": "button#submit"}
+{"event_id": 501, "type": "scroll", "depth": "75%"}
+{"event_id": 500, "type": "click", "element": "button#submit"}
+{"event_id": 501, "type": "scroll", "depth": "75%"}

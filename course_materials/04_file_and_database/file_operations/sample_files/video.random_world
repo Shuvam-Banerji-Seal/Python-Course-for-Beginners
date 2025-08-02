@@ -1,0 +1,10 @@
+
+This file has a .random_world extension,
+but it's actually just a text file!
+
+If this were a real video file (like an MP4),
+a media player like VLC would be able to play it
+regardless of what extension we give it.
+
+The extension is just a hint for the operating system
+and applications - it doesn't change the actual content!
