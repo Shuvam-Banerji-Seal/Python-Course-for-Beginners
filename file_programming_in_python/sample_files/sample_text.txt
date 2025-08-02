@@ -1,0 +1,17 @@
+Hello World!
+This is a sample text file for the File Programming in Python course.
+
+It contains multiple lines with different types of content:
+- English text
+- Numbers: 123, 456, 789
+- Special characters: !@#$%^&*()
+- Unicode characters: café, naïve, résumé
+- Emojis: 🐍 🚀 💻
+
+This file is used to demonstrate:
+1. Basic file reading operations
+2. Character encoding (UTF-8)
+3. Text analysis functions
+4. File mode demonstrations
+
+The file ends here.
