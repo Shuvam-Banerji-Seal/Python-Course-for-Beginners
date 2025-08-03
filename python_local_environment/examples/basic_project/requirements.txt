@@ -1,4 +1,0 @@
-# Basic project requirements
-requests>=2.25.0
-click>=8.0.0
-rich>=10.0.0

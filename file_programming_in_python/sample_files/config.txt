@@ -1,3 +1,0 @@
-debug=True
-port=8080
-host=localhost

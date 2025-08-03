@@ -1,0 +1,43 @@
+# Python Course for Beginners - Required Packages
+
+# Core Data Science and Visualization
+numpy>=1.21.0
+pandas>=1.3.0
+matplotlib>=3.4.0
+seaborn>=0.11.0
+
+# Jupyter Notebook Support
+jupyter>=1.0.0
+ipykernel>=6.0.0
+notebook>=6.4.0
+
+# GUI Development
+tkinter-page>=0.1.0  # Note: tkinter is built-in to Python
+
+# Database Support
+sqlite3  # Built-in to Python, but listed for reference
+
+# File Handling and Data Processing
+openpyxl>=3.0.0  # Excel file support
+python-csv>=0.0.13  # Enhanced CSV support
+
+# Development Tools
+black>=21.0.0  # Code formatting
+flake8>=3.9.0  # Code linting
+pytest>=6.2.0  # Testing framework
+
+# Additional Utilities
+requests>=2.25.0  # HTTP requests
+rich>=10.0.0  # Rich text and beautiful formatting
+click>=8.0.0  # Command line interface creation
+
+# Optional: Advanced Libraries (for advanced topics)
+# Uncomment as needed for specific lessons
+# scikit-learn>=1.0.0  # Machine learning
+# flask>=2.0.0  # Web development
+# django>=3.2.0  # Web framework
+# pillow>=8.0.0  # Image processing
+
+# Note: Some packages like tkinter and sqlite3 are built into Python
+# This file includes packages that enhance the learning experience
+# Install with: pip install -r requirements.txt
