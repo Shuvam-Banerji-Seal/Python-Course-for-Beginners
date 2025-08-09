@@ -1,0 +1,50 @@
+# GPU Support Requirements
+# Additional dependencies for GPU acceleration
+
+# Include base requirements
+-r requirements.txt
+
+# ============================================================================
+# GPU-ACCELERATED PYTORCH
+# ============================================================================
+
+# PyTorch with CUDA support (replace CPU versions)
+# Note: Users should install the appropriate version for their CUDA version
+# Visit https://pytorch.org/get-started/locally/ for specific instructions
+
+# For CUDA 11.8 (most common)
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch>=2.0.0,<3.0.0
+torchvision>=0.15.0,<1.0.0
+torchaudio>=2.0.0,<3.0.0
+
+# ============================================================================
+# GPU MONITORING AND UTILITIES
+# ============================================================================
+
+# NVIDIA GPU monitoring
+nvidia-ml-py>=12.535.0,<13.0.0
+
+# GPU memory management
+gpustat>=1.1.1,<2.0.0
+
+# ============================================================================
+# ACCELERATED INFERENCE
+# ============================================================================
+
+# Accelerated transformers inference
+accelerate>=0.24.0,<1.0.0
+
+# Optimized attention mechanisms
+flash-attn>=2.3.0,<3.0.0; platform_system != "Windows"
+
+# Quantization support
+bitsandbytes>=0.41.0,<1.0.0; platform_system != "Windows"
+
+# ============================================================================
+# CUDA UTILITIES
+# ============================================================================
+
+# CUDA toolkit utilities (if needed)
+# Note: These are typically installed system-wide
+# cupy-cuda11x>=12.2.0,<13.0.0  # Uncomment if needed

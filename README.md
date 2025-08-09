@@ -19,6 +19,7 @@ This repository contains a comprehensive Python programming course structured as
 - **GUI Development**: Tkinter applications and interactive programs
 - **Mathematical Computing**: Matrices, vectors, and computational algorithms
 - **Web Concepts**: Networking fundamentals and system architecture
+- **Local AI/ML Applications**: Running Large Language Models locally with Ollama and Transformers
 - **Real-World Projects**: Complete applications including quiz systems and games
 
 ## 📚 Course Structure
@@ -80,6 +81,17 @@ This repository contains a comprehensive Python programming course structured as
 └── professional_practices/   # Software ethics and licensing
 ```
 
+### 🤖 **Local Large Language Models** (Weeks 17-18)
+```
+📁 course_materials/07_local_llms/
+├── ollama_basics/            # Ollama installation and usage
+├── huggingface_transformers/ # Alternative local LLM approaches
+├── model_formats/            # GGUF, SafeTensors, and Modelfile formats
+├── system_prompts/           # Prompt engineering and customization
+├── setup_scripts/            # Automated installation tools
+└── notebooks/                # Interactive Jupyter notebooks
+```
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -103,7 +115,7 @@ pip install -r requirements.txt  # If available
 
 ### Course Navigation
 1. **Start with `course_materials/01_fundamentals/`** - Core concepts and syntax
-2. **Follow the numbered sequence** - Progress through 01, 02, 03, 04, 05, 06
+2. **Follow the numbered sequence** - Progress through 01, 02, 03, 04, 05, 06, 07
 3. **Review class sessions** - Check `class_sessions/` for specific class materials
 4. **Practice with assessments** - Use `assessments_and_homework/` for exercises
 5. **Reference resources** - Consult `resources_and_references/` for additional materials
@@ -117,7 +129,7 @@ Focus on: `course_materials/01_fundamentals/`, `course_materials/02_control_stru
 Focus on: `course_materials/04_file_and_database/`, `course_materials/05_gui_and_applications/`, practical projects
 
 ### 💡 **Advanced Track** (6+ months)
-Focus on: `course_materials/06_advanced_topics/`, complete project implementations, professional practices
+Focus on: `course_materials/06_advanced_topics/`, `course_materials/07_local_llms/`, complete project implementations, professional practices
 
 ## 🛠️ Key Features
 
