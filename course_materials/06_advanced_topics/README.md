@@ -23,3 +23,10 @@ By the end of this section, students will:
 - `environment_management/` - Virtual environments and deployment
 - `networking_concepts/` - Network programming basics
 - `professional_practices/` - Ethics, licensing, and standards
+
+## Next Steps
+
+After completing this section, students can explore:
+- [Local Large Language Models](../07_local_llms/) - Apply advanced concepts to AI/ML applications
+- Real-world projects that combine multiple course concepts
+- Professional development and deployment practices

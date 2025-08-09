@@ -21,5 +21,12 @@ By the end of this section, students will:
 
 - `desktop_applications/` - Tkinter GUI development
 - `data_visualization/` - Plotting and graphics
-- `complete_projects/` - Full application implementations
-- `project_templates/` - Reusable project structures
+- `quiz_system_project/` - Complete quiz system implementation
+- `tictactoe_game_project/` - Game development project
+
+## Next Steps
+
+After completing this section, students can explore:
+- [Advanced Topics](../06_advanced_topics/) - Object-oriented programming and professional practices
+- [Local Large Language Models](../07_local_llms/) - AI/ML applications with modern interfaces
+- Integration of GUI concepts with advanced programming topics

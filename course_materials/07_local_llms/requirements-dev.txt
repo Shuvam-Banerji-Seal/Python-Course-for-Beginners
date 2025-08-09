@@ -1,0 +1,88 @@
+# Development Requirements
+# Additional dependencies for development and advanced features
+
+# Include base requirements
+-r requirements.txt
+
+# ============================================================================
+# DEVELOPMENT TOOLS
+# ============================================================================
+
+# Advanced code formatting and linting
+black[jupyter]>=23.7.0,<24.0.0
+isort[colors]>=5.12.0,<6.0.0
+flake8-docstrings>=1.7.0,<2.0.0
+flake8-import-order>=0.18.2,<1.0.0
+
+# Documentation generation
+sphinx>=7.1.0,<8.0.0
+sphinx-rtd-theme>=1.3.0,<2.0.0
+myst-parser>=2.0.0,<3.0.0
+
+# Pre-commit hooks
+pre-commit>=3.4.0,<4.0.0
+
+# ============================================================================
+# ADVANCED TESTING
+# ============================================================================
+
+# Extended testing capabilities
+pytest-xdist>=3.3.1,<4.0.0
+pytest-mock>=3.11.1,<4.0.0
+pytest-benchmark>=4.0.0,<5.0.0
+pytest-timeout>=2.1.0,<3.0.0
+
+# Coverage reporting
+coverage[toml]>=7.3.0,<8.0.0
+
+# ============================================================================
+# PROFILING AND PERFORMANCE
+# ============================================================================
+
+# Memory profiling
+memory-profiler>=0.61.0,<1.0.0
+pympler>=0.9,<1.0.0
+
+# Performance profiling
+line-profiler>=4.1.0,<5.0.0
+py-spy>=0.3.14,<1.0.0
+
+# ============================================================================
+# ADVANCED MODEL FEATURES
+# ============================================================================
+
+# Model quantization and optimization
+optimum>=1.14.0,<2.0.0
+
+# ONNX support for model conversion
+onnx>=1.15.0,<2.0.0
+onnxruntime>=1.16.0,<2.0.0
+
+# Model compression
+torch-pruning>=1.2.0,<2.0.0
+
+# ============================================================================
+# ADDITIONAL UTILITIES
+# ============================================================================
+
+# Advanced configuration management
+hydra-core>=1.3.0,<2.0.0
+omegaconf>=2.3.0,<3.0.0
+
+# Experiment tracking
+wandb>=0.15.0,<1.0.0
+tensorboard>=2.14.0,<3.0.0
+
+# Rich terminal output
+rich>=13.5.0,<14.0.0
+typer>=0.9.0,<1.0.0
+
+# ============================================================================
+# JUPYTER EXTENSIONS
+# ============================================================================
+
+# Enhanced Jupyter experience
+jupyterlab-widgets>=3.0.0,<4.0.0
+jupyterlab-git>=0.44.0,<1.0.0
+nbconvert>=7.8.0,<8.0.0
+nbformat>=5.9.0,<6.0.0
