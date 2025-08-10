@@ -90,3 +90,7 @@ datasets/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+
+#kiro
+.kiro/
