@@ -1,0 +1,8 @@
+# Requirements for SQL with Python notebooks
+# sqlite3 is part of Python's standard library, so no installation needed
+# If you need to install Python packages, use pip install -r requirements.txt
+
+# For Python environment activation:
+# source /home/shuvam/codes/.global/bin/activate
+
+# Note: sqlite3 comes built-in with Python 2.5+ and doesn't need separate installation
